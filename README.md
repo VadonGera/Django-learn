@@ -173,9 +173,34 @@ Django, наших еще нет)
       Q(status='completed') & (Q(priority='high') | Q(priority='urgent'))
   )
   ```
-## 01.08.2024 - Модели
+## 01.08.2024 - Модели. Связь "один-ко-многим"
 * В приложении `todolist` создана модель `Comment`
 * Создана миграция модели `Comment`
 * Связали `Task` и `Comment` "один-ко-многим"
 * Настроили админку для добавления записей в `Comment` 
 через `TabularInline` (отображает связанные объекты в табличном виде)
+
+## 02.08.2024 - Модели. Связь "многие-ко-многим"
+* В приложении `todolist` создана модель `Tag`
+* В модель `Task` добавлено поле tags
+  ```python
+  tags = models.ManyToManyField(
+    to='todolist.Tag', 
+    verbose_name='теги', 
+    related_name='tasks',
+  )
+  ```
+* Создана миграция. Результат - две таблицы:
+  * SELECT id, name FROM todolist_tag
+  * SELECT id, task_id, tag_id FROM todolist_task_tags
+* Добавление тегов через `python manage.py shell`:
+  * `from todolist.models import Tag, Task`
+  * `task = Task.objects.get(pk=1)`
+  * `tag = Tag.objects.create(name='новый тег')`
+  * `task.tags.add(tag)`
+  * `task.save()` # обязательно !
+  * `task.tags.all()`
+
+
+
+

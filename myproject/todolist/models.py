@@ -14,6 +14,7 @@ class Task(models.Model):
 
     status = models.CharField(choices=STATUSES, default=STATUS_DRAFT, verbose_name='Статус', max_length=10)
     owner = models.CharField(max_length=50, default='anonim', verbose_name='Владелец')
+    tags = models.ManyToManyField('todolist.Tag', verbose_name='теги', related_name='tasks')
 
     due_date = models.DateTimeField(null=True, blank=True, verbose_name='Срок выполнения')
 
@@ -36,3 +37,13 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.comment
+
+class Tag(models.Model):
+    name = models.CharField(max_length=50, verbose_name='Название тега')
+
+    class Meta:
+        verbose_name = 'тег'
+        verbose_name_plural = 'теги'
+
+    def __str__(self):
+        return self.name
