@@ -85,13 +85,13 @@ Django, наших еще нет)
 
 ## 30.07.2024 - Модели
 * В приложении `todolist` создана модель `Task`
-* Миграции
-  * Создать
-    * `python manage.py makemigrations`
-  * Применить (но не плохо было бы сначала позмотреть)
-    * `python manage.py migrate`
-  * Проверить
-    * `python manage.py showmigrations`
-  * Откатить
-    * `python manage.py migrate your_app_name 0001`
-    * `python manage.py migrate todolist 0001` #-> todolist <-#
+  * Миграции:
+    * Создать `python manage.py makemigrations`
+    * Применить (но не плохо было бы сначала позмотреть) `python manage.py migrate`
+    * Проверить `python manage.py showmigrations`
+    * Откатить `python manage.py migrate todolist 0001`
+* Создана миграция модели `Task` в приложении `todolist` и 
+как следствие в базе данных создана таблица `todolist_task`
+* Модель `Task` изменена. Добавлены поля: `status`, `owner` 
+с использованием свойства `choices`. 
+Создана и применена миграция (**0002_task_owner_task_status.py**)
