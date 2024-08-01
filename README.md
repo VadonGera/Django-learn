@@ -95,3 +95,25 @@ Django, наших еще нет)
 * Модель `Task` изменена. Добавлены поля: `status`, `owner` 
 с использованием свойства `choices`. 
 Создана и применена миграция (**0002_task_owner_task_status.py**)
+
+## 30.07.2024 - Настройка админки
+* Создаем суперпользователя `python manage.py createsuperuser`
+* Переход по адресу http://127.0.0.1:8000/admin/
+* Регистрируем и настраиваем модель (модели) в админке 
+в файле **admin.py**
+  ```python
+  # todolist/admin.py
+  
+  from django.contrib import admin
+  from todolist.models import Task
+  
+  # admin.site.register(Task)
+  # или по красоте:
+  @admin.register(Task)
+  class TaskAdmin(admin.ModelAdmin):
+      list_display = ('name', 'status', 'owner', 'due_date')
+      list_filter = ('status', 'owner', 'due_date')
+      search_fields = ('name', 'description')
+  ```
+  `list_display` - что видим, `list_filter` - как фильтруем, 
+`search_fields` - где ищем.
