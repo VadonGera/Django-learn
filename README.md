@@ -117,3 +117,59 @@ Django, наших еще нет)
   ```
   `list_display` - что видим, `list_filter` - как фильтруем, 
 `search_fields` - где ищем.
+
+## 30.07.2024 - QuerySet
+
+Тестим выборки через консоль: `python manage.py shell`
+
+Выход из консоли: `exit()` или ctrl+d
+
+* Выборки.
+  * `Task.objects.get(id=6)`
+  * `for task in Task.objects.all(): print(task.__dict__)`
+  * `Task.objects.values('status').distinct()`
+  * `Task.objects.all().order_by('due_date')`   # По возрастанию
+  * `Task.objects.all().order_by('-due_date')`  # По убыванию
+  * `Task.objects.all()[:10]`  # Первые десять задач
+  * `Task.objects.all()[10:20]`  # Задачи с 11-й по 20-ю
+* Фильтрация данных, модификаторы фильтрации
+  * `Task.objects.filter(status='Черновик')` # выбрали
+  * `Task.objects.exclude(status='Черновик')` # исключили
+  * `Task.objects.filter(status__iexact='черновик')` # точное совпадение, но не чувствуем регистр
+  * `Task.objects.filter(status__contains='рнови')` # подстрока, чувствуем регистр
+  * `Task.objects.filter(status__icontains='РНОВИ')` # подстрока, не чувствуем регистр
+  * `__startswith` - Проверка начала строки, чувствуем регистр
+  * `__istartswith` - Проверка начала строки, не чувствуем регистр
+  * `__endswith` - Проверка конца строки, чувствуем регистр
+  * `__iendswith` - Проверка конца строки, не чувствуем регистр
+  * `__gt`, `__gte`, `__lt`, `__lte` (больше, больше или равно, меньше, меньше или равно)
+  * `Task.objects.filter(due_date__gt=datetime.date.today())`
+
+* Проверка принадлежности к списку значений
+  ```python
+  list_owner = ['admin', 'anonim', 'faka']
+  Task.objects.filter(owner__in=list_owner)
+  ```
+* Проверка на null (или отсутствие значения) (!!! не None !!!)
+  ```python
+  Task.objects.filter(due_date__isnull=True)
+  ```
+* Проверка диапазона значений
+  ```python
+  Task.objects.filter(due_date__range=[start_of_week, end_of_week])
+  ```
+
+* Комплексная фильтрация (Q-объекты)
+  ```python
+  complex_filter = Task.objects.filter(
+      status='completed', 
+      priority='high'
+  ).exclude(due_date__lt=datetime.date.today())
+  ```
+  ```python
+  from django.db.models import Q
+  
+  complex_filter = Task.objects.filter(
+      Q(status='completed') & (Q(priority='high') | Q(priority='urgent'))
+  )
+  ```
