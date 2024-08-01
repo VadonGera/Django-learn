@@ -201,6 +201,15 @@ Django, наших еще нет)
   * `task.save()` # обязательно !
   * `task.tags.all()`
 
-
-
+## 02.08.2024 - REST API и Django REST Framework (DRF)
+* https://www.django-rest-framework.org/
+* Установка `pip install djangorestframework` или через **requirements.txt**
+* Добавили `'rest_framework'` в список `INSTALLED_APPS` в файле **settings.py**
+* Создали отображение (вьюсет) `TodolistViewSet` на основе модели `Task`
+в файле **todolist/views.py**. 
+* Создали для `TodolistViewSet` сериализатор `TaskSerializer`
+для преобразования модели в JSON и обратно в файле **serializers.py**
+* `TodolistViewSet` зарегестрировали в роутере с префиксом 'tasks' в файле **todolist/urls.ry**
+* Роутер добавили в `urlpatterns` в файле **myproject/urls.ry**
+* API доступен по адресу http://127.0.0.1:8000/tasks/
 
