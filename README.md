@@ -83,3 +83,15 @@ git push -u origin main
 Django, наших еще нет)
   * ```python manage.py migrate``` 
 
+## 30.07.2024 - Модели
+* В приложении `todolist` создана модель `Task`
+* Миграции
+  * Создать
+    * `python manage.py makemigrations`
+  * Применить (но не плохо было бы сначала позмотреть)
+    * `python manage.py migrate`
+  * Проверить
+    * `python manage.py showmigrations`
+  * Откатить
+    * `python manage.py migrate your_app_name 0001`
+    * `python manage.py migrate todolist 0001` #-> todolist <-#
