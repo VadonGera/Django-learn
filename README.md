@@ -62,3 +62,24 @@ git push -u origin main
   * Переход по адресу http://127.0.0.1:8000/about/ отображает 
   шаблон **about.html**.
 
+## 30.07.2024 - Подключение проекта к PostgreSQL
+* Установка `pip install psycopg[binary]` или через **requirements.txt**
+* Настройка Django для использования PostgreSQL
+  ```python
+  # settings.py
+  
+  DATABASES = {
+      'default': {
+          'ENGINE': 'django.db.backends.postgresql',
+          'NAME': 'todolist',       # Имя базы данных
+          'USER': 'postgres',       # Имя пользователя
+          'PASSWORD': 'secret',     # !!! Пароль пользователя
+          'HOST': 'localhost',      # Хост, по умолчанию 'localhost', опционально
+          'PORT': '5432',           # Порт, по умолчанию '5432', опционально
+      }
+  }
+  ```
+* Миграции базы данных (те, что натворил создатель 
+Django, наших еще нет)
+  * ```python manage.py migrate``` 
+
