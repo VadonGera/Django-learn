@@ -2,10 +2,10 @@
 
 ## 24.06.2024 - Init
 * `git init`
-* Создан файл requirements.txt
+* Создан файл **requirements.txt**
   * ```pip install -r requirements.txt```
-* Создан файл .gitignore
-* Создан файл README.md
+* Создан файл **.gitignore**
+* Создан файл **README.md**
 
 ## 24.06.2024 - Creat
 * Установка Django
@@ -23,3 +23,42 @@ git branch -M main
 git remote add origin https://github.com/VadonGera/Django-learn.git
 git push -u origin main
 ```
+
+## 24.06.2024 - Создание приложений `todolist` и `about`
+* `python manage.py startapp todolist`
+* `python manage.py startapp about`
+* Файл **urls.py** проекта настроен, маршруты для 
+приложений `todolist` и `about` подключены.
+  ```chatinput
+  urlpatterns = [
+        path('admin/', admin.site.urls),
+        path('todolist/', include('todolist.urls')),
+        path('about/', include('about.urls')),
+    ]
+   ```
+* В приложениях `todolist` и `about` созданы файлы **urls.py** и 
+настроены маршруты для главной страницы и страницы About, 
+которые связаны с функциями base и about соответственно.
+  ```chatinput
+  # ./todolist/urls.py
+  from .views import base
+  
+  urlpatterns = [path('', base, name='base')]
+  ```
+  ```chatinput
+  # ./about/urls.py
+  from .views import about
+  
+  urlpatterns = [path('', about, name='about')]
+  ```
+* В файлах **views.py** приложений `todolist` и `about` созданы 
+функции `base` и `about`, которые обрабатывает запрос и 
+возвращают шаблоны **base.html** и **about.html** соответственно.
+* Созданы директории **./todolist/templates/todolist** и 
+**./about/templates/about**, в которых созданы файлы шаблонов 
+**base.html** и **about.html**.
+  * Переход по адресу http://127.0.0.1:8000/todolist/ отображает 
+  шаблон **base.html**.
+  * Переход по адресу http://127.0.0.1:8000/about/ отображает 
+  шаблон **about.html**.
+
