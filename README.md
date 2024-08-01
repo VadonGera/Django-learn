@@ -173,3 +173,6 @@ Django, наших еще нет)
       Q(status='completed') & (Q(priority='high') | Q(priority='urgent'))
   )
   ```
+## 01.08.2024 - Модели
+* В приложении `todolist` создана модель `Comment`
+* Создана миграция модели `Comment`
