@@ -14,14 +14,14 @@ class TegSerializer(serializers.ModelSerializer):
 class TaskSerializer(serializers.ModelSerializer):
     # Создаем новое поле - кол-во тегов задачи
     # tags_count = serializers.SerializerMethodField()
-    tags_count = serializers.IntegerField(source='tags.all.count')
+    tags_count = serializers.IntegerField(source='tags.all.count', read_only=True)
     tags = TegSerializer(many=True, read_only=True)
 
     class Meta:
         model = Task
         # fields = '__all__'
         # exclude = ['owner'] # или:
-        fields = ['name', 'description', 'due_date', 'status', 'tags', 'tags_count']
+        fields = ['id', 'name', 'description', 'due_date', 'status', 'tags', 'tags_count']
 
     # Вычисляем новое поле по правилам def get_<имя поля>
     # obj - наш объект Task
