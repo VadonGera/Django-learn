@@ -32,3 +32,8 @@ class CommentListCreateAPIView(generics.ListCreateAPIView):
 class CommentRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
+
+    # Можно переопределять методы, но надо еще разбираться.
+    # def perform_destroy(self, instance):
+    #     instance.is_active = False
+    #     instance.save()

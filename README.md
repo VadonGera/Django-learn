@@ -176,6 +176,19 @@ Django, наших еще нет)
       Q(status='completed') & (Q(priority='high') | Q(priority='urgent'))
   )
   ```
+### Применяем `QuerySet` в контроллерах `ViewSet` и `Generic`
+Если возникают сложности построить `queryset` напрямую, 
+на помощь спешит `get_queryset`
+```python
+class TodolistViewSet(viewsets.ModelViewSet):
+    # queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+    
+    def get_queryset(self):
+        # Здесь что-то получаем извне и строим queryset
+        return Task.objects.filter() # Здесь - 'гуляй рванина'
+```
+
 ## 01.08.2024 - Модели. Связь "один-ко-многим"
 * В приложении `todolist` создана модель `Comment`
 * Создана миграция модели `Comment`
@@ -205,26 +218,28 @@ Django, наших еще нет)
   * `task.tags.all()`
 
 ## 02.08.2024 - REST API и Django REST Framework (DRF)
+
 * https://www.django-rest-framework.org/
 * Установка `pip install djangorestframework` или через **requirements.txt**
 * Добавили `'rest_framework'` в список `INSTALLED_APPS` в файле **settings.py**
 * Создали контроллер (отображение, вьюсет) `TodolistViewSet` на основе модели `Task`
 в файле **todolist/views.py**. 
-  * Вьюсет (ViewSet) — это класс, который предоставляет действия 
-  (GET, POST, PUT, DELETE) для работы с наборами данных.
+* Вьюсет (`ViewSet`) — это класс, который предоставляет действия 
+(GET, POST, PUT, DELETE) для работы с наборами данных.
 * Создали для `TodolistViewSet` сериализатор `TaskSerializer`
 для преобразования модели в JSON и обратно в файле **serializers.py**
 * `TodolistViewSet` зарегестрировали в роутере с префиксом 'tasks' в файле **todolist/urls.ry**
 * Роутер добавили в `urlpatterns` в файле **myproject/urls.ry**
-* API доступен по адресу http://127.0.0.1:8000/tasks/
-  * GET /tasks/: получить список всех задач.
-  * POST /tasks/: создать новую задачу.
-  * GET /tasks/{id}/: получить информацию о конкретной задаче.
-  * PUT /tasks/{id}/: обновить информацию о конкретной задаче.
-  * PATCH /tasks/{id}/: частично обновить информацию о конкретной задаче.
-  * DELETE /tasks/{id}/: удалить конкретную задачу.
+* API доступен по адресу http://127.0.0.1:8000/todolist/api/tasks/
+  * GET /todolist/api/tasks/: получить список всех задач.
+  * POST /todolist/api/tasks/: создать новую задачу.
+  * GET /todolist/api/tasks/{id}/: получить информацию о конкретной задаче.
+  * PUT /todolist/api/tasks/{id}/: обновить информацию о конкретной задаче.
+  * PATCH /todolist/api/tasks/{id}/: частично обновить информацию о конкретной задаче.
+  * DELETE /todolist/api/tasks/{id}/: удалить конкретную задачу.
 
 ## 02.08.2024 - Создание эндпоинта с помощью Generic
+
 * `GenericAPIView` — базовый класс, который предоставляет 
 функциональность для работы с запросами и сериализаторами.
 * Создаем эндпоинты для модели `Comment`:
@@ -233,15 +248,23 @@ Django, наших еще нет)
   * `CommentRetrieveUpdateDestroyAPIView` - для просмотра, редактирования, удаления
   * Используя `generics`, можно подобрать любые варианты на вкус, цвет и **путь**.
   * Эндпоинты зарегистрировали в роутере, добавив пути для представлений.
-* API доступен по адресу http://127.0.0.1:8000/comments/
-  * GET /comments/: получить список комментов.
-  * POST /comments/: создать коммент.
-  * GET /comments/{id}/: получить коммент.
-  * PUT /comments/{id}/: обновить коммент.
-  * PATCH /comments/{id}/: частично обновить коммент.
-  * DELETE /comments/{id}/: удалить коммент.
+* API доступен по адресу http://127.0.0.1:8000/todolist/api/comments/
+  * GET /todolist/api/comments/: получить список комментов.
+  * POST /todolist/api/comments/: создать коммент.
+  * GET /todolist/api/comments/{id}/: получить коммент.
+  * PUT /todolist/api/comments/{id}/: обновить коммент.
+  * PATCH /todolist/api/comments/{id}/: частично обновить коммент.
+  * DELETE /todolist/api/comments/{id}/: удалить коммент.
+
+В контроллерах ViewSet и Generic можно переопределять методы
+```python
+    # def perform_destroy(self, instance):
+    #     instance.is_active = False
+    #     instance.save()
+```
 
 ## 02.08.2024 - Сериализация, десериализация и валидация данных
+
 * Изменены сериализаторы `TaskSerializer` и `CommentSerializer`
 * Вычисляемые поля
   * Не обязатеьно должны быть в модели, можно добавить сериализатор

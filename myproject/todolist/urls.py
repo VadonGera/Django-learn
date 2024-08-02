@@ -13,11 +13,11 @@ from todolist.apps import TodolistConfig
 app_name = TodolistConfig.name
 
 router = DefaultRouter()
-router.register('tasks', TodolistViewSet)
+router.register('api/tasks', TodolistViewSet)
 
 
 urlpatterns = [
     path('', base, name='base'),
-    path('comments/', CommentListCreateAPIView.as_view()),
-    path('comments/<int:pk>/', CommentRetrieveUpdateDestroyAPIView.as_view()),
+    path('api/comments/', CommentListCreateAPIView.as_view()),
+    path('api/comments/<int:pk>/', CommentRetrieveUpdateDestroyAPIView.as_view()),
 ] + router.urls

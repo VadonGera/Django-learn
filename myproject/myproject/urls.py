@@ -40,7 +40,7 @@ urlpatterns = [
     path('todolist/', include('todolist.urls', namespace='todolist')),
     path('about/', include('about.urls', namespace='about')),
 
-    path('', include('todolist.urls', namespace='tasks')),
+    # path('api/', include('todolist.urls', namespace='tasks')),
     path('api-auth/', include('rest_framework.urls')),
 
     # path('swagger<format>/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
