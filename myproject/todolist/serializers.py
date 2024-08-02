@@ -20,7 +20,8 @@ class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         # fields = '__all__'
-        exclude = ['owner']
+        # exclude = ['owner'] # или:
+        fields = ['name', 'description', 'due_date', 'status', 'tags', 'tags_count']
 
     # Вычисляем новое поле по правилам def get_<имя поля>
     # obj - наш объект Task

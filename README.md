@@ -285,3 +285,28 @@ Django, наших еще нет)
               raise serializers.ValidationError("недопустимое слово 'word'")
           return data
   ```
+  
+## 02.08.2024 - Документация. Настройка
+* Django REST Swagger
+* Django REST Framework Schemas
+* Redoc 
+* dft-yasg - наш вариант https://drf-yasg.readthedocs.io/en/stable/readme.html#usage
+
+
+* Установка `pip install drf-yasg` и `pip install setuptools`
+* В **settings.py**
+  ```python
+  # settings.py
+    
+  INSTALLED_APPS = [
+      ...
+      'drf_yasg',
+      ...
+  ]
+   ```
+* Настройка **myproject/urls.py** из документации по `drf-yasg`
+* Добавили адреса для документации `'swagger/'` и `'redoc/'`
+* Документация доступена по адресам:
+  * http://127.0.0.1:8000/swagger/
+  * http://127.0.0.1:8000/redoc/
+
