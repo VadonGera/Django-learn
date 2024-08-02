@@ -266,4 +266,6 @@ Django, наших еще нет)
           model = Task
           exclude = ['owner']
   ```
-* 
+* Вложенные сериализаторы. Делаем теги не через `id`, а JSON
+  * Создали `TegSerializer`
+  * В `TaskSerializer` переобъявляем, сериализуя, поле `tags`

@@ -1,6 +1,13 @@
 from rest_framework import serializers
 
-from todolist.models import Task, Comment
+from todolist.models import Task, Comment, Tag
+
+# Сериализатор для тегов Tag
+class TegSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Tag
+        fields = ['id', 'name']
 
 
 # Сериализатор для задач Task
@@ -8,6 +15,7 @@ class TaskSerializer(serializers.ModelSerializer):
     # Создаем новое поле - кол-во тегов задачи
     # tags_count = serializers.SerializerMethodField()
     tags_count = serializers.IntegerField(source='tags.all.count')
+    tags = TegSerializer(many=True, read_only=True)
 
     class Meta:
         model = Task
