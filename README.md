@@ -205,11 +205,27 @@ Django, наших еще нет)
 * https://www.django-rest-framework.org/
 * Установка `pip install djangorestframework` или через **requirements.txt**
 * Добавили `'rest_framework'` в список `INSTALLED_APPS` в файле **settings.py**
-* Создали отображение (вьюсет) `TodolistViewSet` на основе модели `Task`
+* Создали контроллер (отображение, вьюсет) `TodolistViewSet` на основе модели `Task`
 в файле **todolist/views.py**. 
+  * Вьюсет (ViewSet) — это класс, который предоставляет действия 
+  (GET, POST, PUT, DELETE) для работы с наборами данных.
 * Создали для `TodolistViewSet` сериализатор `TaskSerializer`
 для преобразования модели в JSON и обратно в файле **serializers.py**
 * `TodolistViewSet` зарегестрировали в роутере с префиксом 'tasks' в файле **todolist/urls.ry**
 * Роутер добавили в `urlpatterns` в файле **myproject/urls.ry**
 * API доступен по адресу http://127.0.0.1:8000/tasks/
+  * GET /tasks/: получить список всех задач.
+  * POST /tasks/: создать новую задачу.
+  * GET /tasks/{id}/: получить информацию о конкретной задаче.
+  * PUT /tasks/{id}/: обновить информацию о конкретной задаче.
+  * PATCH /tasks/{id}/: частично обновить информацию о конкретной задаче.
+  * DELETE /tasks/{id}/: удалить конкретную задачу.
 
+## 02.08.2024 - Создание эндпоинта с помощью Generic
+* `GenericAPIView` — базовый класс, который предоставляет 
+функциональность для работы с запросами и сериализаторами.
+* Создаем эндпоинты для модели `Comment`:
+  * Сериализатор `CommentSerializer`
+  * `CommentListCreateAPIView` - для просмотра и создания
+  * `CommentRetrieveUpdateDestroyAPIView` - для просмотра, редактирования, удаления
+  * Используя `generics`, можно подобрать любые варианты на вкус и цвет.

@@ -1,13 +1,27 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from todolist.models import Task
-from todolist.serializers import TaskSerializer
+from rest_framework import generics
+from todolist.models import Task, Comment
+from todolist.serializers import TaskSerializer, CommentSerializer
 
 
 def base(request):
     return render(request, 'todolist/base.html')
 
 
+# Контроллер для модели Task через ViewSet
 class TodolistViewSet(viewsets.ModelViewSet):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
+
+
+# Контроллер для Comment (для просмотра списка и создания объекта) через Generic
+class CommentListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+
+
+# Контроллер для Comment (для просмотра, редактирования (PUT и PATCH), удаления объекта) через Generic
+class CommentRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
