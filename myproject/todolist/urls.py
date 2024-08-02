@@ -7,8 +7,10 @@ from .views import (
 )
 from rest_framework.routers import DefaultRouter
 
+from todolist.apps import TodolistConfig
 
-app_name = 'tasks'
+# app_name = 'tasks'
+app_name = TodolistConfig.name
 
 router = DefaultRouter()
 router.register('tasks', TodolistViewSet)

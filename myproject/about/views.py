@@ -1,5 +1,12 @@
 from django.shortcuts import render
 
+context = 'user@main'
+
 
 def about(request):
-    return render(request, 'about/about.html')
+    """About view"""
+    return render(
+        request,
+        'about/about.html',
+        context={'user': context},
+    )

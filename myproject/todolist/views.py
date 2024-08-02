@@ -4,9 +4,16 @@ from rest_framework import generics
 from todolist.models import Task, Comment
 from todolist.serializers import TaskSerializer, CommentSerializer
 
+context = 'user@main - my variable'
+
 
 def base(request):
-    return render(request, 'todolist/base.html')
+    """Base view"""
+    return render(
+        request,
+        'todolist/base.html',
+        context={'variable': context},
+    )
 
 
 # Контроллер для модели Task через ViewSet
