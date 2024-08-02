@@ -269,3 +269,19 @@ Django, наших еще нет)
 * Вложенные сериализаторы. Делаем теги не через `id`, а JSON
   * Создали `TegSerializer`
   * В `TaskSerializer` переобъявляем, сериализуя, поле `tags`
+* Валидация:
+  * На уровне поля имя метода должно быть `validate_<field_name>`
+  * На уровне объекта используется метод `validate`
+  ```python
+      # Валидация на уровне поля comment
+      def validate_comment(self, value):
+          if 'bad' in value:
+              raise serializers.ValidationError("недопустимое слово 'bad'")
+          return value
+  
+      # Валидация на уровне объекта comment
+      def validate(self, data):
+          if 'word' in data['comment']:
+              raise serializers.ValidationError("недопустимое слово 'word'")
+          return data
+  ```

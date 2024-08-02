@@ -35,7 +35,14 @@ class CommentSerializer(serializers.ModelSerializer):
         # fields = '__all__'
         fields = ['task', 'comment']
 
+    # Валидация на уровне поля comment
     def validate_comment(self, value):
         if 'bad' in value:
             raise serializers.ValidationError("недопустимое слово 'bad'")
         return value
+
+    # Валидация на уровне объекта comment
+    def validate(self, data):
+        if 'word' in data['comment']:
+            raise serializers.ValidationError("недопустимое слово 'word'")
+        return data
