@@ -240,4 +240,30 @@ Django, наших еще нет)
 
 ## 02.08.2024 - Сериализация, десериализация и валидация данных
 * Изменены сериализаторы `TaskSerializer` и `CommentSerializer`
+* Вычисляемые поля
+  * Не обязатеьно должны быть в модели, можно добавить сериализатор
+  * Добавляем поле `tags_count` через атрибут `SerializerMethodField`:
+  ```python
+  class TaskSerializer(serializers.ModelSerializer):
+      # Создаем новое поле - кол-во тегов задачи
+      tags_count = serializers.SerializerMethodField()
+      
+      class Meta:
+          model = Task
+          exclude = ['owner']
+  
+      # Вычисляем новое поле по правилам def get_<имя поля>
+      # obj - наш объект Task
+      def get_tags_count(self, obj):
+          return obj.tags.all().count()
+  ```
+  * или добавляем с использованием `source` с полем:
+  ```python
+  class TaskSerializer(serializers.ModelSerializer):
+      tags_count = serializers.IntegerField(source='tags.all.count')
+  
+      class Meta:
+          model = Task
+          exclude = ['owner']
+  ```
 * 

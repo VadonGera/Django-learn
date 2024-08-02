@@ -5,12 +5,19 @@ from todolist.models import Task, Comment
 
 # Сериализатор для задач Task
 class TaskSerializer(serializers.ModelSerializer):
+    # Создаем новое поле - кол-во тегов задачи
+    # tags_count = serializers.SerializerMethodField()
+    tags_count = serializers.IntegerField(source='tags.all.count')
 
     class Meta:
         model = Task
         # fields = '__all__'
         exclude = ['owner']
 
+    # Вычисляем новое поле по правилам def get_<имя поля>
+    # obj - наш объект Task
+    # def get_tags_count(self, obj):
+    #     return obj.tags.all().count()
 
 # Сериализатор для комментариев Comment
 class CommentSerializer(serializers.ModelSerializer):
