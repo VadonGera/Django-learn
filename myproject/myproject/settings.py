@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'todolist',  # Имя вашей базы данных
+        'NAME': 'django',  # Имя вашей базы данных 'todolist'
         'USER': 'postgres',      # Имя пользователя
         'PASSWORD': 'postgres',  # Пароль пользователя
         'HOST': 'localhost',   # Хост, по умолчанию 'localhost', опционально
