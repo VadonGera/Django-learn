@@ -339,8 +339,8 @@ class TodolistViewSet(viewsets.ModelViewSet):
 ## 03.08.2024 - Создание собственной модели пользователя
 
 1. Создано приложение для пользователей
-1. [ ] `python manage.py startapp users`
-2. [ ] `INSTALLED_APPS`, `AUTH_USER_MODEL`
+* `python manage.py startapp users`
+* Настройка settings.py `INSTALLED_APPS`, `AUTH_USER_MODEL`
     ```python
     # settings.py
       
@@ -351,4 +351,6 @@ class TodolistViewSet(viewsets.ModelViewSet):
     # используем кастомную модель вместо встроенной
     AUTH_USER_MODEL = 'users.User'
     ```
-
+2. Создана модель `User` и менеджер объектов `CustomUserManager` для нее
+3. Создана миграция для модели, но не прошла !!!
+* Причина: прежняя модель User связана в базе с другими таблицами
