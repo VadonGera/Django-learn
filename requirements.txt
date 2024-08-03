@@ -3,3 +3,4 @@ psycopg[binary]
 djangorestframework
 drf-yasg
 setuptools
+djangorestframework-simplejwt

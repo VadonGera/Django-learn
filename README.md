@@ -363,4 +363,36 @@ class TodolistViewSet(viewsets.ModelViewSet):
 4. Миграции прошли успешно.
 5. Заново создали Супера `python manage.py createsuperuser`
 
+## 03.08.2024 - Системы аутентификации в DRF на JWT
 
+1. Установка 
+   * `pip install djangorestframework-simplejwt`
+2. Настройка
+    ```python
+    # settings.py
+    from datetime import timedelta
+    
+    INSTALLED_APPS = [
+        ...
+        'rest_framework',
+        'rest_framework_simplejwt',
+    ]
+    
+    # JWT-аутентификация
+    REST_FRAMEWORK = {
+        'DEFAULT_AUTHENTICATION_CLASSES': (
+            'rest_framework_simplejwt.authentication.JWTAuthentication',
+        ),
+    }
+   
+    SIMPLE_JWT = {
+       'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+       'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+       'ROTATE_REFRESH_TOKENS': False,
+       'BLACKLIST_AFTER_ROTATION': True,
+       'ALGORITHM': 'HS256',
+       'SIGNING_KEY': SECRET_KEY,
+       'VERIFYING_KEY': None,
+       'AUTH_HEADER_TYPES': ('Bearer',),
+   }
+   ```
