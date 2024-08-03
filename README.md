@@ -336,3 +336,19 @@ class TodolistViewSet(viewsets.ModelViewSet):
   * http://127.0.0.1:8000/swagger/
   * http://127.0.0.1:8000/redoc/
 
+## 03.08.2024 - Создание собственной модели пользователя
+
+1. Создано приложение для пользователей
+1. [ ] `python manage.py startapp users`
+2. [ ] `INSTALLED_APPS`, `AUTH_USER_MODEL`
+    ```python
+    # settings.py
+      
+    INSTALLED_APPS = [
+        ...
+        'users',
+    ]
+    # используем кастомную модель вместо встроенной
+    AUTH_USER_MODEL = 'users.User'
+    ```
+
