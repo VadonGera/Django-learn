@@ -1,5 +1,7 @@
 from django.contrib import admin
 from todolist.models import Task, Comment
+from django.contrib.auth.admin import UserAdmin
+from users.models import User
 
 
 # admin.site.register(Task)
@@ -16,3 +18,12 @@ class TaskAdmin(admin.ModelAdmin):
     search_fields = ('name', 'description')
 
     inlines = [CommentInLine]
+
+
+@admin.register(User)
+class CustomUserAdmin(UserAdmin):
+    model = User
+    list_display = ('email', 'username', 'first_name', 'last_name', 'is_staff', 'is_active',)
+    list_filter = ('email', 'is_staff', 'is_active',)
+    search_fields = ('email',)
+    ordering = ('email',)

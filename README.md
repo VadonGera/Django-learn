@@ -28,18 +28,18 @@ git push -u origin main
 ```
 
 ## 24.06.2024 - Создание приложений `todolist` и `about`
-* `python manage.py startapp todolist`
-* `python manage.py startapp about`
-* Файл **urls.py** проекта настроен, маршруты для 
-приложений `todolist` и `about` подключены.
-  ```chatinput
-  urlpatterns = [
-        path('admin/', admin.site.urls),
-        path('todolist/', include('todolist.urls')),
-        path('about/', include('about.urls')),
+`python manage.py startapp todolist`
+`python manage.py startapp about`
+  * Файл **urls.py** проекта настроен, маршруты для 
+  приложений `todolist` и `about` подключены.
+    ```chatinput
+    urlpatterns = [
+      path('admin/', admin.site.urls),
+      path('todolist/', include('todolist.urls')),
+      path('about/', include('about.urls')),
     ]
-   ```
-* В приложениях `todolist` и `about` созданы файлы **urls.py** и 
+    ```
+В приложениях `todolist` и `about` созданы файлы **urls.py** и 
 настроены маршруты для главной страницы и страницы About, 
 которые связаны с функциями base и about соответственно.
   ```chatinput
@@ -54,14 +54,14 @@ git push -u origin main
   
   urlpatterns = [path('', about, name='about')]
   ```
-* В файлах **views.py** приложений `todolist` и `about` созданы 
+В файлах **views.py** приложений `todolist` и `about` созданы 
 функции `base` и `about`, которые обрабатывает запрос и 
 возвращают шаблоны **base.html** и **about.html** соответственно.
-* Созданы директории **./todolist/templates/todolist** и 
+Созданы директории **./todolist/templates/todolist** и 
 **./about/templates/about**, в которых созданы файлы шаблонов 
 **base.html** и **about.html**.
-  * Переход по адресу http://127.0.0.1:8000/todolist/ отображает 
-  шаблон **base.html**.
+  * Переход по адресу http://127.0.0.1:8000/todolist/ 
+  отображает шаблон **base.html**.
   * Переход по адресу http://127.0.0.1:8000/about/ отображает 
   шаблон **about.html**.
 
@@ -101,7 +101,9 @@ Django, наших еще нет)
 
 ## 30.07.2024 - Настройка админки
 * Создаем суперпользователя `python manage.py createsuperuser`
-* Переход по адресу http://127.0.0.1:8000/admin/
+* Переход по адресу 
+
+1. [ ] http://127.0.0.1:8000/admin/
 * Регистрируем и настраиваем модель (модели) в админке 
 в файле **admin.py**
   ```python
@@ -230,7 +232,9 @@ class TodolistViewSet(viewsets.ModelViewSet):
 для преобразования модели в JSON и обратно в файле **serializers.py**
 * `TodolistViewSet` зарегестрировали в роутере с префиксом 'tasks' в файле **todolist/urls.ry**
 * Роутер добавили в `urlpatterns` в файле **myproject/urls.ry**
-* API доступен по адресу http://127.0.0.1:8000/todolist/api/tasks/
+* API доступен по адресу 
+
+1. [ ] http://127.0.0.1:8000/todolist/api/tasks/
   * GET /todolist/api/tasks/: получить список всех задач.
   * POST /todolist/api/tasks/: создать новую задачу.
   * GET /todolist/api/tasks/{id}/: получить информацию о конкретной задаче.
@@ -240,15 +244,17 @@ class TodolistViewSet(viewsets.ModelViewSet):
 
 ## 02.08.2024 - Создание эндпоинта с помощью Generic
 
-* `GenericAPIView` — базовый класс, который предоставляет 
+`GenericAPIView` — базовый класс, который предоставляет 
 функциональность для работы с запросами и сериализаторами.
-* Создаем эндпоинты для модели `Comment`:
+Создаем эндпоинты для модели `Comment`:
   * Сериализатор `CommentSerializer`
   * `CommentListCreateAPIView` - для просмотра и создания
   * `CommentRetrieveUpdateDestroyAPIView` - для просмотра, редактирования, удаления
   * Используя `generics`, можно подобрать любые варианты на вкус, цвет и **путь**.
   * Эндпоинты зарегистрировали в роутере, добавив пути для представлений.
-* API доступен по адресу http://127.0.0.1:8000/todolist/api/comments/
+* API доступен по адресу 
+
+1. [ ] http://127.0.0.1:8000/todolist/api/comments/
   * GET /todolist/api/comments/: получить список комментов.
   * POST /todolist/api/comments/: создать коммент.
   * GET /todolist/api/comments/{id}/: получить коммент.
@@ -319,8 +325,8 @@ class TodolistViewSet(viewsets.ModelViewSet):
 * dft-yasg - наш вариант https://drf-yasg.readthedocs.io/en/stable/readme.html#usage
 
 
-* Установка `pip install drf-yasg` и `pip install setuptools`
-* В **settings.py**
+Установка `pip install drf-yasg` и `pip install setuptools`
+В **settings.py**
   ```python
   # settings.py
     
@@ -330,11 +336,11 @@ class TodolistViewSet(viewsets.ModelViewSet):
       ...
   ]
    ```
-* Настройка **myproject/urls.py** из документации по `drf-yasg`
-* Добавили адреса для документации `'swagger/'` и `'redoc/'`
-* Документация доступена по адресам:
-  * http://127.0.0.1:8000/swagger/
-  * http://127.0.0.1:8000/redoc/
+Настройка **myproject/urls.py** из документации по `drf-yasg`
+Добавили адреса для документации `'swagger/'` и `'redoc/'`
+Документация доступена по адресам:
+1. [ ] Swagger http://127.0.0.1:8000/swagger/
+2. [ ] Redoc http://127.0.0.1:8000/redoc/
 
 ## 03.08.2024 - Создание собственной модели пользователя
 
@@ -365,6 +371,8 @@ class TodolistViewSet(viewsets.ModelViewSet):
 
 ## 03.08.2024 - Системы аутентификации в DRF на JWT
 
+https://django-rest-framework-simplejwt.readthedocs.io/en/latest/getting_started.html#installation
+
 1. Установка 
    * `pip install djangorestframework-simplejwt`
 2. Настройка
@@ -374,7 +382,7 @@ class TodolistViewSet(viewsets.ModelViewSet):
     
     INSTALLED_APPS = [
         ...
-        'rest_framework',
+        # 'rest_framework',
         'rest_framework_simplejwt',
     ]
     
@@ -384,15 +392,23 @@ class TodolistViewSet(viewsets.ModelViewSet):
             'rest_framework_simplejwt.authentication.JWTAuthentication',
         ),
     }
-   
-    SIMPLE_JWT = {
-       'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
-       'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-       'ROTATE_REFRESH_TOKENS': False,
-       'BLACKLIST_AFTER_ROTATION': True,
-       'ALGORITHM': 'HS256',
-       'SIGNING_KEY': SECRET_KEY,
-       'VERIFYING_KEY': None,
-       'AUTH_HEADER_TYPES': ('Bearer',),
-   }
    ```
+   * SIMPLE_JWT см. https://django-rest-framework-simplejwt.readthedocs.io/en/latest/settings.html
+
+3. Подключение.
+   * Скорректирована модель `User`. Добавлено поле `username`.
+   Потом надо его убрать !!! Хотел как круче, получилось как всегда.
+   * Выполнена миграция User
+   * Созданы эндпоинты для авторизации пользователя. 
+     * Маршрут для получения Access- и Refresh-токенов использует 
+     кастомное представления (views) `MyTokenObtainPairView`
+     * Маршрут для получения Access-токенов по Refresh-токену 
+     использует готовое представление (views) `TokenRefreshView`
+   * Создан сериализатор для регистрации пользователя `RegisterSerializer`
+   * Создан `ViewSet` `RegisterView`.
+
+1. [ ] API для получения Access- и Refresh-токенов http://127.0.0.1:8000/api/token/
+2. [ ] API для получения Access-токенов по Refresh-токену http://127.0.0.1:8000/api/token/refresh/
+3. [ ] API для создания нового пользователя http://127.0.0.1:8000/api/register/
+
+* Подключил пользователей в админке.
