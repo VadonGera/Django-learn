@@ -344,7 +344,7 @@ class TodolistViewSet(viewsets.ModelViewSet):
 
 ## 03.08.2024 - Создание собственной модели пользователя
 
-1. Создано приложение для пользователей
+1. Создано приложение для пользователей `users`
 * `python manage.py startapp users`
 * Настройка settings.py `INSTALLED_APPS`, `AUTH_USER_MODEL`
     ```python
@@ -412,3 +412,11 @@ https://django-rest-framework-simplejwt.readthedocs.io/en/latest/getting_started
 3. [ ] API для создания нового пользователя http://127.0.0.1:8000/api/register/
 
 * Подключил пользователей в админке.
+
+## 04.08.2024 - Управление доступом пользователей
+
+Контроллеры `TodolistViewSet`, `CommentListCreateAPIView` и
+`CommentRetrieveUpdateDestroyAPIView` закрыты для неавторизованных пользователей
+```
+permission_classes = [IsAuthenticated]
+```
