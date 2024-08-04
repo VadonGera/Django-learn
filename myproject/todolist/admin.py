@@ -29,8 +29,9 @@ class CustomUserAdmin(UserAdmin):
     ordering = ('email',)
 
 
-@admin.register(Tag)
-class TagAdmin(admin.ModelAdmin):
-    list_display = ('name', 'id',)
-    # list_filter = ('status', 'owner', 'due_date')
-    search_fields = ('name',)
+admin.site.register(Tag)
+# @admin.register(Tag)
+# class TagAdmin(admin.ModelAdmin):
+#     list_display = ('name', 'id',)
+#     # list_filter = ('status', 'owner', 'due_date')
+#     search_fields = ('name',)

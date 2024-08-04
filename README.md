@@ -412,6 +412,7 @@ https://django-rest-framework-simplejwt.readthedocs.io/en/latest/getting_started
 3. [ ] API для создания нового пользователя http://127.0.0.1:8000/api/register/
 
 * Подключил пользователей в админке.
+* Модель `Tag` добавил в админку.
 
 ## 04.08.2024 - Управление доступом пользователей
 
@@ -421,4 +422,7 @@ https://django-rest-framework-simplejwt.readthedocs.io/en/latest/getting_started
 permission_classes = [IsAuthenticated]
 ```
 
-* Модель `Tag` добавил в админку.
+Для модели `Task` создал пермишн `IsOwner` - проверяем, что пользователь является 
+владельцем объекта или является членом персонала.
+
+Применил `IsOwner` на вьюсете `TodolistViewSet`
