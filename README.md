@@ -1,5 +1,20 @@
 ### Проект Django `myproject`
 
+## 14.08.2024 - Доработки + исправляем ошибки
++ Урлы регистрации, авторизации и рефреш токена 
+перенес в приложение `users`.
++ Исправил: _"В RegisterView нет необходимости писать queryset, так как мы ничего из бд там не ищем, а только создаем"_
++ Класс `CustomUserManager` теперь наследуем от `BaseUserManager`,
+а не от `UserManager`. С `UserManager` не мог отвязаться
+от `username`. Теперь модель `User` без `username`
++ settings.py
+  ```python
+  LANGUAGE_CODE = 'ru-RU'
+  TIME_ZONE = 'Europe/Moscow'
+  ```
++ `CustomUserAdmin` перенес в user\admin.py
+
+===========================================================
 ## 24.06.2024 - Init
 * `git init`
 * Создан файл **requirements.txt**
