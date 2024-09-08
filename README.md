@@ -1,5 +1,30 @@
 ### Проект Django `myproject`
 
+## 04.09.2024 - Библиотека `python-decouple`
+
++ `pip install python-decouple`
++ 
+  ```python
+  # .env
+  
+  # postgres
+  DATABASE_NAME=name
+  DATABASE_USER=user
+  DATABASE_PASSWORD=pass
+  DATABASE_HOST=host
+  DATABASE_PORT=5432
+  
+  # Redis
+  REDIS_HOST=127.0.0.1
+  REDIS_PORT=6379
+  
+  # django
+  DJANGO_SECRET_KEY=django-insecure-1fbk87
+  DJANGO_DEBUG=True
+  ```
++ Обновлен **settings.py**
++ Создан файл **.env.example**
+
 ## 14.08.2024 - Доработки + исправляем ошибки
 + Урлы регистрации, авторизации и рефреш токена 
 перенес в приложение `users`.

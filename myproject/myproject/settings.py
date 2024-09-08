@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -106,11 +107,11 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'django',  # Имя вашей базы данных 'todolist'
-        'USER': 'postgres',      # Имя пользователя
-        'PASSWORD': 'postgres',  # Пароль пользователя
-        'HOST': 'localhost',   # Хост, по умолчанию 'localhost', опционально
-        'PORT': '5432',        # Порт, по умолчанию '5432', опционально
+        'NAME': config('DATABASE_NAME'),
+        'USER': config('DATABASE_USER'),
+        'PASSWORD': config('DATABASE_PASSWORD'),
+        'HOST': config('DATABASE_HOST', default='127.0.0.1'),
+        'PORT': config('DATABASE_PORT', default=5432, cast=int),
     }
 }
 
@@ -194,4 +195,17 @@ SIMPLE_JWT = {
     # "TOKEN_BLACKLIST_SERIALIZER": "rest_framework_simplejwt.serializers.TokenBlacklistSerializer",
     # "SLIDING_TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainSlidingSerializer",
     # "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
+}
+
+REDIS_HOST = config('REDIS_HOST')
+REDIS_PORT = config('REDIS_PORT')
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache', # бэкенд для работы с кешем в Redis
+        'LOCATION': 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/1', # адрес расположения сервера Redis
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient', # установка клиента для работы с кешем по умолчанию
+        }
+    }
 }

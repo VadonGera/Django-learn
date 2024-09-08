@@ -8,6 +8,9 @@ from todolist.models import Task, Comment
 from todolist.serializers import TaskSerializer, CommentSerializer
 from rest_framework import permissions
 
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+
 context = 'user@main - my variable'
 
 
@@ -40,6 +43,7 @@ class TodolistViewSet(viewsets.ModelViewSet):
 
 
 # Контроллер для Comment (для просмотра списка и создания объекта) через Generic
+@method_decorator(cache_page(60 * 15), name='get')
 class CommentListCreateAPIView(generics.ListCreateAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
